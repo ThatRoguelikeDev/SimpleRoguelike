@@ -1,0 +1,38 @@
+// Data file for The Simple Roguelike
+// Use roguelib.Color(#, #, #) or a color from http://doryen.eptalys.net/data/libtcod/doc/1.5.1/html2/color.html?c=false&cpp=false&cs=false&py=false&lua=false for COLOR.
+// For instance, roguelib.Color(50, 50, 50) or roguelib.dark_grey
+// The first color is the color of the object when in the players field of view. The second color is the color of the object if not in field of view(only visible if ALWAYS_VISIBLE is set to 'true').
+
+// Tiles.
+tile "Stone Wall"{
+IMAGE='#'
+SOLID=true
+BLOCKS_SIGHT=true
+ALWAYS_VISIBLE=true
+COLOR="[roguelib.lighter_grey, roguelib.dark_grey]"
+DESCRIPTION="A stone wall."
+}
+tile "Dirt Floor"{
+IMAGE='.'
+SOLID=false
+BLOCKS_SIGHT=false
+ALWAYS_VISIBLE=true
+COLOR="[roguelib.light_sepia, roguelib.darkest_sepia]"
+DESCRIPTION="A dirt floor."
+}
+tile "Stairs Up"{
+IMAGE='<'
+SOLID=false
+BLOCKS_SIGHT=false
+ALWAYS_VISIBLE=true
+COLOR="[roguelib.white, roguelib.white]"
+DESCRIPTION="Stone steps that lead up."
+}
+tile "Stairs Down"{
+IMAGE='>'
+SOLID=false
+BLOCKS_SIGHT=false
+ALWAYS_VISIBLE=true
+COLOR="[roguelib.white, roguelib.white]"
+DESCRIPTION="Stone steps that lead down."
+}

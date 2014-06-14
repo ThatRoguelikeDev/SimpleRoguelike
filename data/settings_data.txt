@@ -1,0 +1,4 @@
+// Settings file for The Simple Roguelike
+// Use roguelib.Color(#, #, #) or a color from http://doryen.eptalys.net/data/libtcod/doc/1.5.1/html2/color.html?c=false&cpp=false&cs=false&py=false&lua=false for COLOR.
+// For instance, roguelib.Color(50, 50, 50) or roguelib.dark_grey
+
