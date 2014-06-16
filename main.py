@@ -20,6 +20,7 @@ import extract_data as parser
 
 # Load parsed data
 TILE_DATA = parser.tile_data
+SETTING_DATA = parser.setting_data
 
 # Constants.
 # Screen/Map constants.
@@ -37,14 +38,14 @@ MESSAGE_CONSOLE_WIDTH = 65
 MESSAGE_CONSOLE_Y = SCREEN_HEIGHT - MESSAGE_CONSOLE_HEIGHT
 
 # FOV constants.
-TORCH_RADIUS = 5
+TORCH_RADIUS = SETTING_DATA[b"Game Settings"][b"TORCH_RADIUS"]
 FOV_LIGHT_WALLS = True
 FOV_ALGO = roguelib.FOV_BASIC
 
 # Dungeon building constants.
-ROOM_MAX_SIZE = 13
-ROOM_MIN_SIZE = 5
-MAX_ROOMS = 45
+ROOM_MIN_SIZE = SETTING_DATA[b"Game Settings"][b"ROOM_MIN_SIZE"]
+ROOM_MAX_SIZE = SETTING_DATA[b"Game Settings"][b"ROOM_MAX_SIZE"]
+MAX_ROOMS = SETTING_DATA[b"Game Settings"][b"MAX_ROOMS"]
 
 # Game Save Data.
 LEVELS = {}
@@ -276,7 +277,7 @@ def render_all():
     # Display mouse location if in FOV.
     mouse, key = check_for_key_events()
     if roguelib.map_is_in_fov(fov_map, mouse.cx, mouse.cy):
-        roguelib.console_put_char_ex(0, mouse.cx, mouse.cy, " ", None, roguelib.orange)
+        roguelib.console_put_char_ex(0, mouse.cx, mouse.cy, " ", None, eval(SETTING_DATA[b"Mouse Highlight"][b"COLOR"]))
 
     # Display objects.
     for obj in objects:
@@ -374,7 +375,7 @@ def render_gui():
                roguelib.dark_grey, roguelib.white)
 
     # Prints number of turns and dungeon level on screen.
-    roguelib.console_set_default_foreground(console_gui, roguelib.white)
+    roguelib.console_set_default_foreground(console_gui, eval(SETTING_DATA[b"Text Color"][b"COLOR"]))
     roguelib.console_print(console_gui, SCREEN_WIDTH - 15, 2, "Turns:" + str(turns))
     roguelib.console_print(console_gui, SCREEN_WIDTH // 2, 2, "Depth:" + str(depth))
 
@@ -662,17 +663,17 @@ def main_menu():
 
     # Create buttons.
     widgets_list = [widgets.Button(int(SCREEN_WIDTH/2), 15, "Start Game",
-                                   [roguelib.red, roguelib.red, roguelib.light_red], "run_game()"),
+                                   eval(SETTING_DATA[b"Button Color"][b"COLOR"]), "run_game()"),
                     widgets.Button(int(SCREEN_WIDTH/2), 18, "Exit",
-                                   [roguelib.red, roguelib.red, roguelib.light_red], "exit()")]
+                                   eval(SETTING_DATA[b"Button Color"][b"COLOR"]), "exit()")]
 
     # Create loop for the menu to run.
     while not roguelib.console_is_window_closed():
 
-        title = "THE SIMPLE ROGUELIKE"
+        title = SETTING_DATA[b"Title Text"][b"TEXT"]
 
-        # Display stuff.
-        roguelib.console_set_default_foreground(0, roguelib.yellow)
+        # Display title+widgets.
+        roguelib.console_set_default_foreground(0, eval(SETTING_DATA[b"Title Color"][b"COLOR"]))
         roguelib.console_print_ex(0, int(SCREEN_WIDTH / 2), 5,
                                   roguelib.BKGND_NONE, roguelib.CENTER, title)
 
@@ -711,10 +712,10 @@ font = b"data\\fonts\\terminal12x12_gs_ro.png"
 roguelib.console_set_custom_font(font, roguelib.FONT_LAYOUT_ASCII_INROW)
 
 # Initiate game window.
-roguelib.console_init_root(SCREEN_WIDTH, SCREEN_HEIGHT, b"Simple Roguelike", False, roguelib.RENDERER_SDL)
+roguelib.console_init_root(SCREEN_WIDTH, SCREEN_HEIGHT, SETTING_DATA[b"Title Text"][b"TEXT"], False, roguelib.RENDERER_SDL)
 
 # Set fps.
-roguelib.sys_set_fps(20)
+roguelib.sys_set_fps(SETTING_DATA[b"Game Settings"][b"FPS"])
 
 # Start game.
 main_menu()

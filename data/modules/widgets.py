@@ -13,7 +13,7 @@ class Button:
         self.text = text
         self.w = x+len(text)/2
         self.h = y+1
-        self.color = color
+        self.color = [color[0], color[0], color[1]]
         self.action = action
 
     def selected(self, mouse):

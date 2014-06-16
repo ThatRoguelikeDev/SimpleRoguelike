@@ -1,4 +1,35 @@
 // Settings file for The Simple Roguelike
 // Use roguelib.Color(#, #, #) or a color from http://doryen.eptalys.net/data/libtcod/doc/1.5.1/html2/color.html?c=false&cpp=false&cs=false&py=false&lua=false for COLOR.
 // For instance, roguelib.Color(50, 50, 50) or roguelib.dark_grey
+// For buttons, the first color is used as the normal color, the second is used for when the buttons is hovered over by the mouse.
 
+// Game settings
+setting "Game Settings"{
+FPS=30
+ROOM_MIN_SIZE=5
+ROOM_MAX_SIZE=15
+MAX_ROOMS=25
+TORCH_RADIUS=5
+}
+// Text settings.
+setting "Title Text"{
+TEXT="THE SIMPLE ROGUELIKE"
+}
+// GUI colors
+setting "Title Color"{
+COLOR="roguelib.red"
+}
+setting "Text Color"{
+COLOR="roguelib.red"
+}
+setting "Button Color"{
+COLOR="[roguelib.red, roguelib.light_red]"
+}
+setting "Message Colors"{
+MESSAGE_NORMAL="roguelibe.grey"
+MESSAGE_GOOD="roguelib.green"
+MESSAGE_WARNING="roguelib.red"
+}
+setting "Mouse Highlight"{
+COLOR="roguelib.orange"
+}
