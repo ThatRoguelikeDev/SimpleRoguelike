@@ -1,4 +1,4 @@
-SimpleRoguelike
+The Simple Roguelike Creator(SRC)
 ===============
 
 A simple roguelike base to work as a foundation for a future project of mine.
